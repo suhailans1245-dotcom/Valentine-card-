@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Users List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="users-container">
+    <h1>❤️ List of valentines</h1>
+
+    <button class="add-btn" onclick="goToAdd()">➕Generate </button>
+    
+
+    <ul id="userList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+  window.onload = loadUsers;
+  function getBasicAuthHeader() {
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+    console.log("Email:", email);
+    console.log("Password:", password);
+    if (!email || !password) {}
+    const token = btoa(`${email}:${password}`);
+      return `Basic ${token}`;
+    }
+
+    function loadUsers(){
+    fetch("http://192.168.1.37:8000/users_valentines",{
+      method: "GET",
+      headers: {
+        "Authorization": getBasicAuthHeader(),
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Response data:", data);
+      // if (!data.success) return;
+
+      const list = document.getElementById("userList");
+      list.innerHTML = "";
+
+      data.forEach(user => {
+        console.log(user.name)
+        const li = document.createElement("li");
+        li.innerText = `${user.name}`;
+        list.appendChild(li);
+      });
+    })
+    .catch(err => console.log(err));
+
+    }
+  </script>
+</body>
+</html>

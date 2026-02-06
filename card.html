@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Your Valentine Card</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    
+    <div id="motion-layer"></div>
+
+
+    <div class="bg">
+  <div class="scroll"></div>
+  <div class="scroll"></div>
+</div>
+
+
+    
+    <div class="floating-hearts"></div>
+    
+  <div id="card">
+  <div class="card">
+    <div class="heart-icon">💖
+    </div>
+    
+    <h1 id="greeting"></h1>
+    <p>Wishing you lots of love and happiness Babe❤️</p>
+
+    <button class="download-btn" onclick="downloadPNG()">
+      Download Card PNG
+    </button>
+    
+    <script src="script.js"></script>
+  </div>
+
+  </div>
+  <script>
+    const message = localStorage.getItem("cardMessage");
+    const name = localStorage.getItem("cardName");
+    document.getElementById("greeting").textContent = `${message} ${name} 💖`;
+  </script>
+  
+
+</body>
+</html>
